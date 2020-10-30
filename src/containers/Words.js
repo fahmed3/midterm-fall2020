@@ -8,9 +8,8 @@ const newsKey = process.env.REACT_APP_NEWS_API_KEY;
 
 function Words() {
   let { id } = useParams();
-  const [newsData, setNewsData] = useState(null);
   const [wordCloud, setWordCloud] = useState(null);
-  const [titles, setTitles] = useState(null);
+  const [titles, setTitles] = useState("");
 
   let t = "";
 
@@ -22,7 +21,6 @@ function Words() {
       .then(function (response) {
         const d = response.data.news;
         if (d) {
-          setNewsData(d);
           d.map((article, i) => {
             t += d[i].title + " ";
           });
@@ -34,11 +32,13 @@ function Words() {
       });
   }, []);
 
+  const wordcolors = [];
   useEffect(() => {
     axios
       .get(
         `https://quickchart.io/wordcloud?text=${titles}&removeStopwords=true&minWordLength=4&
-        rotation=45&scale=sqrt&width=1000&case=upper`
+        rotation=45&scale=linear&width=1000&case=upper`,
+        { params: { colors: wordcolors } }
       )
       .then(function (response) {
         let d = response.data;
@@ -48,6 +48,15 @@ function Words() {
         console.log(error);
       });
   }, [titles]);
+
+  if (titles === "") {
+    return (
+      <div className="wordcloud">
+        <h1> Most Talked About in {id} </h1>
+        <p> Sorry, looks like there's not enough data for {id} =( </p>
+      </div>
+    );
+  }
 
   return (
     <div className="wordcloud">

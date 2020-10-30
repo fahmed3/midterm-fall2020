@@ -4,8 +4,17 @@
   flex-direction: column;
 }
 
+/* .worldmap {
+  background-position: center; https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+} */
+
+.worldmap {
+  padding-bottom: 15px;
+}
+
 .Countries {
   background-color: #ebe1ca;
+  width: 100%;
 }
 
 h1 {
@@ -34,6 +43,10 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+svg {
+  font-weight: bold;
 }
 
 /* mobile version is bad, dont know how to edit chart or svg */

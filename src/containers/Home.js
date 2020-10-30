@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import { places } from "../components/data";
 import Chart from "react-google-charts";
@@ -7,7 +7,6 @@ import Countries from "../components/Countries";
 const mapKey = process.env.REACT_APP_MAPS_API_KEY;
 
 function Home() {
-  const [country, setCountry] = useState("United States");
   const history = useHistory();
 
   //Formatting to make countries show up on map
@@ -35,12 +34,13 @@ function Home() {
           width={"100%"}
           chartType="GeoChart"
           data={data}
+          //colors = ['#344966', '#F76C5E', '#F5DD90', '#BFCC94', '#E6AACE' ]
           var
           options={{
             displayMode: "marker",
-            backgroundColor: "#7B6B43", //20A4F3
-            defaultColor: "#C16200",
-            datalessRegionColor: "#E6E8E6",
+            backgroundColor: "#344966", //20A4F3
+            defaultColor: "#F76C5E",
+            datalessRegionColor: "#F5DD90",
             legend: "none",
             tooltip: { textStyle: { color: "#A30B37" } },
           }}
